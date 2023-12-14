@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 
-// const API = process.env.REACT_APP_API;
+const API = process.env.REACT_APP_API;
 
 const Buscar_imagen = () => {
     const location = useLocation();
@@ -10,7 +10,7 @@ const Buscar_imagen = () => {
 
     useEffect(() => {
         const fetch_data = async () => {
-            const res = await fetch(`http://dbd6-34-125-21-201.ngrok.io/buscar_imagenes_google`, {
+            const res = await fetch(`${API}/buscar_imagenes_google`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -27,13 +27,13 @@ const Buscar_imagen = () => {
         }
 
         fetch_data();
-    }, [busqueda, clases]);
+    }, [busqueda, clases, imagenes]);
 
     return (
         <div className='w-full max-w-4xl'>
             <h1>Restultados</h1>
             {imagenes.length > 0 ?
-                <p className="mb-10">Imágenes coincidentes con tu búsqueda</p>
+                <p className="mb-10">Imágenes coincidentes con tu búsqueda:</p>
                 :
                 <p className="mb-10">Cargando...</p>
             }
